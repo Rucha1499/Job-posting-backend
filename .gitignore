@@ -1,0 +1,5 @@
+# node modules
+node_modules
+
+# firestore key
+firestore-key.json
