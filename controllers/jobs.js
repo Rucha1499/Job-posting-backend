@@ -19,9 +19,7 @@ const createJob = async (req, res) => {
     return res.status(400).json({ message: error.details[0].message });
   }
   try {
-    const d = Date.now();
-    const date = new Date(d);
-    const dateString = date.toDateString();
+    const date = Date.now();
     const job = {
       jobTitle: req.body.jobTitle,
       jobLocation: req.body.jobLocation,
@@ -31,7 +29,7 @@ const createJob = async (req, res) => {
       maxStipend: req.body.maxStipend,
       jobDuration: req.body.jobDuration,
       jobDescription: req.body.jobDescription,
-      date: dateString,
+      date,
     };
     await jobQuery.addJob(job);
     return res.json({ message: 'Job created successfully!' });
