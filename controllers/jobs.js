@@ -13,6 +13,23 @@ const getJobs = async (req, res) => {
   }
 };
 
+const getJobById = async (req, res) => {
+  try {
+    const result = await jobQuery.fetchJob(req.params.id);
+    const { job } = result;
+
+    if (result.jobExists) {
+      return res.json({
+        message: 'Job returned successfully!',
+        job,
+      });
+    }
+    return res.json({ message: 'Job not found!' });
+  } catch (err) {
+    return err;
+  }
+};
+
 const createJob = async (req, res) => {
   const { error } = jobValidation(req.body);
   if (error) {
@@ -21,16 +38,10 @@ const createJob = async (req, res) => {
   try {
     const date = Date.now();
     const job = {
-      jobTitle: req.body.jobTitle,
-      jobLocation: req.body.jobLocation,
-      skills: req.body.skills,
-      mode: req.body.mode,
-      minStipend: req.body.minStipend,
-      maxStipend: req.body.maxStipend,
-      jobDuration: req.body.jobDuration,
-      jobDescription: req.body.jobDescription,
+      ...req.body,
       date,
     };
+
     await jobQuery.addJob(job);
     return res.json({ message: 'Job created successfully!' });
   } catch (err) {
@@ -40,5 +51,6 @@ const createJob = async (req, res) => {
 
 module.exports = {
   getJobs,
+  getJobById,
   createJob,
 };
