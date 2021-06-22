@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Rucha1499/Job-posting-backend#readme",
   "dependencies": {
+    "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-admin": "^9.9.0",

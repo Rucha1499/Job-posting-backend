@@ -1,5 +1,4 @@
 # node modules
 node_modules
 
-# firestore key
-firestore-key.json
+config/local.js
